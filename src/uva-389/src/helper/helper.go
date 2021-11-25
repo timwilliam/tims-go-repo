@@ -28,8 +28,14 @@ func ToBase(number int64, targetBase int) string {
 		number /= int64(targetBase)
 	}
 
-	// reverse the order of the resulting string
-	return ReverseString(outputString.String())
+	if len(outputString.String()) <= 7 {
+		// reverse the order of the resulting string
+		return ReverseString(outputString.String())
+	} else {
+		// return error if number of digit exceeds DIGIT (default = 7)
+		return "ERROR"
+	}
+
 }
 
 func ReverseString(originalString string) string {

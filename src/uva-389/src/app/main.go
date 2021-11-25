@@ -33,11 +33,6 @@ func main() {
 		numberBaseX := helper.ToBase(numberBaseTen, targetBase)
 
 		// print the results
-		if len(numberBaseX) <= 7 {
-			fmt.Printf("%7s\n", numberBaseX)
-		} else {
-			fmt.Printf("%7s\n", "ERROR")
-		}
-
+		fmt.Printf("%7s\n", numberBaseX)
 	}
 }
