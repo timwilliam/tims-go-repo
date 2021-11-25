@@ -1,7 +1,7 @@
 /*
 	Program		: uva 389 Basically Speaking
 	Author		: timwilliam
-	Compiled	: 2021/11/23
+	Compiled	: 2021/11/25
 */
 
 package main
@@ -11,6 +11,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 	"uva-389/src/helper"
 )
 
@@ -19,18 +20,24 @@ func main() {
 
 	// read until EOF is reached
 	for scanner.Scan() {
-		rawInput := scanner.Text()
-		parsedInput := helper.ParseUserInput(rawInput)
+		parsedInput := strings.Fields(scanner.Text())
 
-		base, _ := strconv.Atoi(parsedInput.Base)
-		targetBase, _ := strconv.Atoi(parsedInput.TargetBase)
+		numberString := parsedInput[0]
+		base, _ := strconv.Atoi(parsedInput[1])
+		targetBase, _ := strconv.Atoi(parsedInput[2])
 
-		// convert first to decimal (base 10)
-		number10 := helper.ToDecimal(parsedInput.Number, base)
+		// convert first to base 10 (decimal)
+		numberBaseTen, _ := strconv.ParseInt(numberString, base, 64)
 
-		// convert number10 to number at target base
-		numberBase := helper.ToBase(number10, targetBase)
+		// convert numberBaseTen to targetBase
+		numberBaseX := helper.ToBase(numberBaseTen, targetBase)
 
-		fmt.Println(helper.PrintOutput(numberBase))
+		// print the results
+		if len(numberBaseX) <= 7 {
+			fmt.Printf("%7s\n", numberBaseX)
+		} else {
+			fmt.Printf("%7s\n", "ERROR")
+		}
+
 	}
 }
